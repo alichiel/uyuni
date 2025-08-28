@@ -164,6 +164,14 @@ Feature: Update activation keys
     And I click on "Update Activation Key"
     Then I should see a "Activation key Proxy Key x86_64 has been modified" text
 
+@uyuni
+@proxy
+@containerized_server
+@skip_if_cloud
+  Scenario: Install the netavark package on Proxy Host
+    When I install package "netavark" on this "proxy"
+    And I refresh the metadata for "proxy"
+
 @scc_credentials
   Scenario: Update build host key with synced base product
     When I follow the left menu "Systems > Activation Keys"
