@@ -195,22 +195,6 @@ class RemoteNode
     end
   end
 
-  # TMP method for DEBUGGING
-  def proxy_run_until_ok(cmd, timeout: 360, runs_in_container: true)
-    repeat_until_timeout(timeout: timeout, report_result: true) do
-      result, code = run(cmd, check_errors: false, runs_in_container: runs_in_container)
-      return [result, code] if code.zero?
-      sleep 2
-    end
-    puts "TIMED OUT!"
-    run("mgrpxy restart", check_errors: false, runs_in_container: false)
-    sleep 60
-    result, code = run(cmd, check_errors: false, runs_in_container: runs_in_container)
-    return [result, code] if code.zero?
-    result
-  end
-
-
   # Runs a command until it fails or times out.
   #
   # @param cmd [String] The command to run.
